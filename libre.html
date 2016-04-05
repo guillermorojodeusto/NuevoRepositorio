@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){ 
+	$("#localizacion_a").click(function(){
+        $("#shadow").fadeIn("normal");
+         $("#localizacion_form").fadeIn("normal");
+         $("#localizacion").focus();
+    });
+	$("#cancel_hide").click(function(){
+        $("#localizacion_form").fadeOut("normal");
+        $("#shadow").fadeOut();
+		
+   });
+ 
+ 
+
+ 
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  else{
+	x.innerHTML="Geolocation is not supported by this browser.";
+   
+  
+  }
+function showPosition(position)
+  {
+ 
+          localizacion=position.coords.latitude+','+position.coords.longitude;
+        
+
+         $.ajax({
+            type: "POST",
+            url: "http://pfmgru.es/proyectotaxi/libre.php",
+            data: "localizacion="+localizacion,
+            success: function(html){
+
+ 	        
+                 
+            }
+        });       
+  }
+
+
+
+   
+     
+});
+</script>
+
+<title>RADIO TAXI GETXO</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Dark Login Form</title>
+ <script>
+function recarga(){
+location.href=location.href
+}
+setInterval('recarga()',300000)
+</script> 
+
+</head>
+<body>
+<form method="post"  action="../login.php" class="login">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/buttonize3.min.css">
+   <div id="profile">
+ 
+<a id="login_a" href="#"></a>
+ 
+</div>
+    <div id="login_form">
+        <div class="err" id="add_err"></div>
+<center>    	
+<a href="ocupado.html" class="buttonize blue" style='width:280px; padding:50px'><b><span style='font-size:50px'>Ocupado</span></b></a>
+<br/>
+<br/>
+<br/>
+<br/>
+<a href="logout.html"  class="buttonize blue" style='width:280px; padding:50px'><b><span style='font-size:50px'>Salir</span></b></a>
+</center>
+      </form>
+	<div id="shadow" class="popup"></div>
+
+      </p>
+      </section>
+</div> 
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$("#login_a").click(function(){
+        $("#shadow").fadeIn("normal");
+         $("#login_form").fadeIn("normal");
+         $("#login").focus();
+    });
+	$("#cancel_hide").click(function(){
+        $("#login_form").fadeOut("normal");
+        $("#shadow").fadeOut();
+		
+   });
+   
+$("#login").click(function(){
+
+        login=$("#logineo").val();
+        pass=$("#passeo").val(); 
+         $.ajax({
+            type: "POST",
+            url:"http://pfmgru.es/proyectotaxi/login.php",
+            data:"login="+login+"&pass="+pass,
+            success: function(html){
+		 
+		      if(html=='true')
+              {
+                $("#login_form").fadeOut("normal");
+				$("#shadow").fadeOut();    
+				window.location.href ='principal.html'; 
+              }
+              else
+              {
+                    $("#add_err").html("Usuario o Contraseña Incorrectos");
+              }
+            },
+            beforeSend:function()
+			{
+                 $("#add_err").html("Cargando...")
+            }
+        });
+         return false;
+    });
+});
+</script>
+<title>RADIO TAXI GETXO</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  
+
+</head>
+<body>
+</br>
+</br>
+<center><IMG SRC="img/RTG.png" style='width:420px; height:100px'></center> 
+<form method="post"  action="../login.php" class="login">
+<link rel="stylesheet" href="css/style.css">
+   <div id="profile">
+
+<a id="login_a" href="#"></a>
+
+</div>
+    <div id="login_form">
+        <div class="err" id="add_err"></div>
+    	
+    <p>
+      <label for="login">Usuario:</label>
+      <input type="text" name="login" id="logineo"  value="">
+    </p>
+
+    <p>
+      <label for="pass">Contraseña:</label>
+      <input type="password" name="pass" id="passeo" value="">
+    </p>
+
+    <p class="login-submit">
+      <button type="submit" id="login" class="login-button">Login</button>
+    </p>
+
+      </form>
+	<div id="shadow" class="popup"></div>
+
+      </p>
+      </section>
+</div>
+</body>
+</html>
